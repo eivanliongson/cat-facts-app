@@ -12,3 +12,4 @@ class Facts {
     text = data['text'];
   }
 }
+
