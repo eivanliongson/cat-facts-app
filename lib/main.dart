@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'facts.dart';
 import 'dart:math';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(CatFacts());
 
@@ -26,21 +27,14 @@ class _HomeUIState extends State<HomeUI> {
   @override
   Widget build(BuildContext context) {
     List<Color> randomColors = [
-      Colors.red,
-      Colors.orange,
-      Colors.blue,
-      Colors.pink
+      Color(0xFF035aa6),
+      Color(0xFF40bad5),
+      Color(0xFF120136),
+      Color(0xFF16817a)
     ];
 
     return Scaffold(
-      backgroundColor: randomColors[random.nextInt(4)],
-        floatingActionButton: FloatingActionButton(onPressed: () async {
-          await facts.getFacts();
-          setState(() {
-            print(facts.text);
-            displayText = facts.text;
-          });
-        }),
+        backgroundColor: randomColors[random.nextInt(4)],
         body: SafeArea(
           child: Column(
             children: <Widget>[
@@ -65,27 +59,51 @@ class _HomeUIState extends State<HomeUI> {
                   width: 400,
                   height: 300,
                   decoration: BoxDecoration(
-                      color: Colors.red,
+                      border: Border.all(width: 4, color: Colors.white),
+                      color: Color(0xFF30475e),
                       borderRadius: BorderRadius.circular(10)),
-                  child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: <Widget>[
-                          Text(
-                            displayText,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      )),
+                  child: ListView(
+                    children: <Widget>[
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: <Widget>[
+                              Text(
+                                displayText,
+                                style: GoogleFonts.balooPaaji(
+                                    textStyle: TextStyle(
+                                        fontSize: 28,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold)),
+                              )
+                            ],
+                          )),
+                    ],
+                  ),
                 ),
               ),
               Container(
-                width: 200,
+                width: 300,
                 height: 50,
-                child: RaisedButton(
-                  onPressed: getFacts,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Container(
+                      width: 250,
+                      child: RaisedButton(
+                        color: Colors.red,
+                        onPressed: getFacts,
+                        child: Center(
+                          child: Text(
+                            'TAP',
+                            style: GoogleFonts.balooPaaji(
+                                textStyle: TextStyle(
+                                    color: Colors.white, fontSize: 20)),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               )
             ],
@@ -93,34 +111,35 @@ class _HomeUIState extends State<HomeUI> {
         ));
   }
 
-  void getFacts() {
-    setState(() async {
-      await facts.getFacts();
-      print(facts.text);
+  getFacts() async {
+    await facts.getFacts();
+    print(facts.text);
+    setState(() {
       displayText = facts.text;
     });
   }
 
   Widget buildImage() {
-    List<Image> image = [
-      Image(
-        image: AssetImage('images/1.jpg'),
-        fit: BoxFit.fill,
-      ),
-      Image(
-        image: AssetImage('images/2.jpg'),
-        fit: BoxFit.fill,
-      )
+
+    List<AssetImage> image = [
+      AssetImage('images/1.jpg'),
+      AssetImage('images/2.jpg'),
+      AssetImage('images/3.jpg'),
+      AssetImage('images/4.jpg')
     ];
 
     return Container(
       height: 300,
       width: 450,
       decoration: BoxDecoration(
+        border: Border.all(width: 4, color: Colors.white),
         borderRadius: BorderRadius.circular(10),
       ),
       child: ClipRRect(
-        child: image[random.nextInt(2)],
+        child: Image(
+          image: image[random.nextInt(2)],
+          fit: BoxFit.fill,
+        ),
         borderRadius: BorderRadius.circular(10),
       ),
     );
@@ -133,14 +152,18 @@ class _HomeUIState extends State<HomeUI> {
         width: 300,
         height: 100,
         decoration: BoxDecoration(
-            border: Border.all(width: 4, color: Colors.red),
+            border: Border.all(width: 4, color: Colors.white),
             borderRadius: BorderRadius.circular(10),
-            color: Colors.orange),
+            color: Color(0xFF30475e)),
         child: Center(
             child: Text(
-          'Random Cat Facts',
-          style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 21),
+          'Did You Know?',
+          style: GoogleFonts.balooPaaji(
+              textStyle: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 21,
+                  letterSpacing: 4)),
         )),
       ),
     );
