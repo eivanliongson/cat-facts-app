@@ -57,7 +57,7 @@ class _HomeUIState extends State<HomeUI> {
                 padding: const EdgeInsets.all(20.0),
                 child: Container(
                   width: 400,
-                  height: 300,
+                  height: 200,
                   decoration: BoxDecoration(
                       border: Border.all(width: 4, color: Colors.white),
                       color: Color(0xFF30475e),
@@ -113,14 +113,12 @@ class _HomeUIState extends State<HomeUI> {
 
   getFacts() async {
     await facts.getFacts();
-    print(facts.text);
     setState(() {
       displayText = facts.text;
     });
   }
 
   Widget buildImage() {
-
     List<AssetImage> image = [
       AssetImage('images/1.jpg'),
       AssetImage('images/2.jpg'),

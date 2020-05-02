@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class Facts {
@@ -11,7 +10,6 @@ class Facts {
     Response response = await get('$baseUrl/facts/random?animal_type=cat&amount=1');
     Map data = jsonDecode(response.body);
     text = data['text'];
+    print(text);
   }
 }
-
-
